@@ -12,8 +12,9 @@ fi
 if [ -z "$NAME" ]
 then
 	echo "Name not specified, using logo name"
-	NAME="$(dirname $LOGO)"
-	NAME="$(basename $NAME)"
+	NAME="$(basename $LOGO)"
+	NAME="${NAME%.png}"
+	echo $NAME
 fi
 
 if [ ! -f "$LOGO" ]
@@ -32,6 +33,6 @@ then
 	echo "spinner not specified, using default one"
 fi
 
-
+mkdir $NAME
 
 echo $LOGO
