@@ -37,4 +37,7 @@ mkdir $NAME
 sed "s/template/$NAME/g" ".template/bootsplash-manjaro-template.sh" > "$NAME/bootsplash-manjaro-$NAME.sh"
 sed -i "s/logo.png/$LOGO/g" "$NAME/bootsplash-manjaro-$NAME.sh"
 sed -i "s/spinner.gif/$SPINNER/g" "$NAME/bootsplash-manjaro-$NAME.sh"
-
+sed "s/template/$NAME/g" ".template/bootsplash-manjaro-template.initcpio_install" > "$NAME/bootsplash-manjaro-$NAME.initcpio_install"
+sed "s/template/$NAME/g" ".template/PKGBUILD" > "$NAME/PKGBUILD"
+sed -i "s/logo.png/$LOGO/g" "$NAME/PKGBUILD"
+sed -i "s/spinner.gif/$SPINNER/g" "$NAME/PKGBUILD"
