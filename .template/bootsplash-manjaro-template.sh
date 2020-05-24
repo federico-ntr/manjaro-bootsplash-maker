@@ -124,6 +124,6 @@ convert -alpha remove \
 	--blob throbber72.rgb \
 	--blob throbber73.rgb \
 	--blob throbber74.rgb \
-	bootsplash-manjaro-ac
+	bootsplash-manjaro-template
 
 rm *.rgb
