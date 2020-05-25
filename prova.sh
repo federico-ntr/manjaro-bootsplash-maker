@@ -41,6 +41,7 @@ sed "s/template/$NAME/g" ".template/bootsplash-manjaro-template.initcpio_install
 sed "s/template/$NAME/g" ".template/PKGBUILD" > "$NAME/PKGBUILD"
 sed -i "s/logo.png/$LOGO/g" "$NAME/PKGBUILD"
 sed -i "s/spinner.gif/$SPINNER/g" "$NAME/PKGBUILD"
+sed "s/template/$NAME/g" ".template/README.md" > "$NAME/README.md"
 cp ".template/bootsplash-packer" "$NAME/bootsplash-packer"
 cp ".template/bootsplash-packer.rst" "$NAME/bootsplash-packer.rst"
 cp "$LOGO" "$NAME/$(basename $LOGO)"
