@@ -48,3 +48,5 @@ cp ".template/bootsplash-packer" "$THDIR/bootsplash-packer"
 cp ".template/bootsplash-packer.rst" "$THDIR/bootsplash-packer.rst"
 cp "$LOGO" "$THDIR/$(basename $LOGO)"
 cp "$SPINNER" "$THDIR/$(basename $SPINNER)"
+
+#( cd "$THDIR" && makepkg -sci ) for building and installing directly
