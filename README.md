@@ -12,6 +12,6 @@ Example:
 
 ./bs_maker.sh /home/holoitsme/Downloads/horse.png /home/holoitsme/Stuff/trot.gif horse
 ```
-The script, in the example above, will create a directory named "horse" and put those two files in it, along with the other stuff needed for you to make a functional package. If you don't provide a spinner the default one inside .template will be used. If you don't specify a name for the theme the name of the .png file will be used.
+The script, in the example above, will create a directory named "manjaro-bootsplash-horse" and put those two files in it, along with the other stuff needed for you to make a functional package. If you don't provide a spinner the default one inside .template will be used. If you don't specify a name for the theme the name of the .png file will be used.
 
 After having succesfully run the script you have to cd in the generated directory and follow the instructions inside the README file to install and set your own bootsplash.
