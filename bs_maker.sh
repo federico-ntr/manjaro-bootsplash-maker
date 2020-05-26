@@ -1,20 +1,38 @@
 #!/bin/bash
-LOGO=$1
-SPINNER=$2 #optional
-NAME=$3 #optional, default value is $LOGO
+usage() { echo "Usage: $0 [-l <logo> ] [-s <spinner> (optional)] [-n <name> (optional)]" 1>&2; exit 1; }
+
+while getopts :l:s:n: opt; do
+	case $opt in
+		l) LOGO=${OPTARG}
+			;;
+		s) 
+			if [ -z "${OPTARG}" ]
+			then
+				usage
+			else
+				SPINNER=${OPTARG}
+			fi
+			;;
+		n) NAME=${OPTARG}
+			;;
+		:)
+      		echo "Error: -${OPTARG} requires an argument."
+      		usage
+      		exit 1
+      		;;
+	esac
+done
 
 if [ -z "$LOGO" ]
 then
-	echo "You must specify logo name"
-	exit 2
+	usage
 fi
 
 if [ -z "$NAME" ]
 then
-	echo "Name not specified, using logo name"
 	NAME="$(basename $LOGO)"
 	NAME="${NAME%.png}"
-	echo $NAME
+	echo "Name not specified, using logo name: $NAME"
 fi
 
 if [ ! -f "$LOGO" ]
