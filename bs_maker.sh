@@ -33,12 +33,23 @@ then
 	echo "spinner not specified, using default one"
 fi
 
+FRAMES=$(identify -format "%n\n" $SPINNER | head -1)
 THDIR="manjaro-bootsplash-$NAME"
 mkdir $THDIR
+#cp ".template/bootsplash-manjaro-template.sh" "$THDIR/bootsplash-manjaro-$NAME.sh"
 
 sed "s/template/$NAME/g" ".template/bootsplash-manjaro-template.sh" > "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/logo.png/$(basename $LOGO)/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/spinner.gif/$(basename $SPINNER)/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
+
+for (( i=0; i<FRAMES; i++ ))
+do
+	echo -e "\t--blob throbber0$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+done
+echo -e "\tbootsplash-manjaro-$NAME" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+echo >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+echo "rm *.rgb" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+
 sed "s/template/$NAME/g" ".template/bootsplash-manjaro-template.initcpio_install" > "$THDIR/bootsplash-manjaro-$NAME.initcpio_install"
 sed "s/template/$NAME/g" ".template/PKGBUILD" > "$THDIR/PKGBUILD"
 sed -i "s/logo.png/$(basename $LOGO)/g" "$THDIR/PKGBUILD"
