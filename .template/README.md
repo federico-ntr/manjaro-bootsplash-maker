@@ -3,8 +3,6 @@ Kernel Bootsplash theme for manjaro Linux using template logo
 
 # Installation:
 
-- `git clone https://github.com/holoitsme/custom-manjaro-bootsplash-collection.git`
-- `cd custom-manjaro-bootsplash-collection/template`
 - run `bootsplash-manjaro-template.sh` to generate STL model.
 - run `makepkg` to create Arch package and install it with `pacman -U $package_name`
 - append `bootsplash-template` hook in the end of HOOKS string of `/etc/mkinitcpio.conf`
