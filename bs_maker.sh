@@ -59,11 +59,22 @@ mkdir $THDIR
 sed "s/template/$NAME/g" ".template/bootsplash-manjaro-template.sh" > "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/logo.png/$(basename $LOGO)/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/spinner.gif/$(basename $SPINNER)/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
-
-for (( i=0; i<FRAMES; i++ ))
-do
-	echo -e "\t--blob throbber0$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
-done
+if [[ ! $FRAMES -ge 10 ]]
+then
+	for (( i=0; i<FRAMES; i++ ))
+	do
+		echo -e "\t--blob throbber0$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+	done
+else
+	for (( i=0; i<10; i++ ))
+	do
+		echo -e "\t--blob throbber0$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+	done
+	for (( i=0; i<FRAMES; i++ ))
+	do
+		echo -e "\t--blob throbber$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+	done
+fi
 echo -e "\tbootsplash-manjaro-$NAME" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
 echo >> "$THDIR/bootsplash-manjaro-$NAME.sh"
 echo "rm *.rgb" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
