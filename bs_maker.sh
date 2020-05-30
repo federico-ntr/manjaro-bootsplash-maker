@@ -70,7 +70,7 @@ else
 	do
 		echo -e "\t--blob throbber0$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
 	done
-	for (( i=0; i<FRAMES; i++ ))
+	for (( i=10; i<FRAMES; i++ ))
 	do
 		echo -e "\t--blob throbber$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
 	done
