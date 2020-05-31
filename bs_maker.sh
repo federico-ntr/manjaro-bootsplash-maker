@@ -1,7 +1,7 @@
 #!/bin/bash
-usage() { echo "Usage: $0 [-l <logo> ] [-s <spinner> (optional)] [-n <name> (optional)] [-p <position> (optional)]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-l <logo> ] [-s <spinner> (optional)] [-n <name> (optional)] [-p <position> (optional)] [-c <hexcolor> (optional)]" 1>&2; exit 1; }
 
-while getopts :l:s:n:p: opt; do
+while getopts :l:s:n:p:c: opt; do
 	case $opt in
 		l) LOGO=${OPTARG}
 			;;
@@ -38,6 +38,16 @@ while getopts :l:s:n:p: opt; do
 					l) POSITION=07
 						;;
 				esac
+			fi
+			;;
+		c)
+			if [ -z "${OPTARG}" ]
+			then
+				usage
+			else
+				RCOLOR=${OPTARG:0:2}
+				GCOLOR=${OPTARG:2:2}
+				BCOLOR=${OPTARG:4}
 			fi
 			;;
 		:)
@@ -82,6 +92,14 @@ then
 	echo "Position not specified, using default one: bottom"
 fi
 
+if [ -z "$RCOLOR" ]
+then
+	RCOLOR=00
+	GCOLOR=00
+	BCOLOR=00
+	echo "Color not specified, using default one: black"
+fi
+
 FRAMES=$(identify -format "%n\n" $SPINNER | head -1)
 THDIR="manjaro-bootsplash-$NAME"
 mkdir $THDIR
@@ -91,6 +109,9 @@ sed "s/template/$NAME/g" ".template/bootsplash-manjaro-template.sh" > "$THDIR/bo
 sed -i "s/logo.png/$(basename $LOGO)/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/spinner.gif/$(basename $SPINNER)/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/05/$POSITION/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
+sed -i "s/XX/$RCOLOR/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
+sed -i "s/YY/$GCOLOR/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
+sed -i "s/ZZ/$BCOLOR/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
 if [[ ! $FRAMES -ge 10 ]]
 then
 	for (( i=0; i<FRAMES; i++ ))
