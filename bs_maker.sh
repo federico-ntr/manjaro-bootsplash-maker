@@ -112,22 +112,15 @@ sed -i "s/05/$POSITION/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/XX/$RCOLOR/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/YY/$GCOLOR/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
 sed -i "s/ZZ/$BCOLOR/g" "$THDIR/bootsplash-manjaro-$NAME.sh"
-if [[ ! $FRAMES -ge 10 ]]
-then
-	for (( i=0; i<FRAMES; i++ ))
-	do
-		echo -e "\t--blob throbber0$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
-	done
-else
-	for (( i=0; i<10; i++ ))
-	do
-		echo -e "\t--blob throbber0$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
-	done
-	for (( i=10; i<FRAMES; i++ ))
-	do
-		echo -e "\t--blob throbber$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
-	done
-fi
+for (( i=0; i<10 && i<FRAMES; i++ ))
+do
+	echo -e "\t--blob throbber0$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+done
+for (( i=10; i<FRAMES; i++ ))
+do
+	echo -e "\t--blob throbber$i.rgb \\" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
+done
+
 echo -e "\tbootsplash-manjaro-$NAME" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
 echo >> "$THDIR/bootsplash-manjaro-$NAME.sh"
 echo "rm *.rgb" >> "$THDIR/bootsplash-manjaro-$NAME.sh"
